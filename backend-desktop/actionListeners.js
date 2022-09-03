@@ -1,24 +1,20 @@
 const { ipcMain } = require('electron');
 
-function registerActionListeners() {
+function registerActionListeners(database) {
   ipcMain.handle('create', (_, name) => {
-    console.log('create', name);
-    return true;
+    return database.create(name)
   });
 
   ipcMain.handle('read', () => {
-    console.log('read');
-    return true;
+    return database.read()
   });
 
   ipcMain.handle('update', (_, name, value) => {
-    console.log('update', name, value);
-    return true;
+    return database.update(name, value)
   });
 
   ipcMain.handle('delete', (_, name) => {
-    console.log('delete', name);
-    return true;
+    return database.delete(name)
   });
 }
 

@@ -40,8 +40,8 @@ export default defineComponent({
   data() {
     return { newName: '' };
   },
-  mounted() {
-    this.counterManager.load();
+  async mounted() {
+    await this.counterManager.load();
   },
 });
 </script>

@@ -3,6 +3,7 @@ const { join } = require('path');
 const {
   registerActionListeners,
 } = require('./backend-desktop/actionListeners');
+const { Database } = require('./backend-desktop/database');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -20,7 +21,8 @@ function createWindow() {
   win.loadURL('http://0.0.0.0:3000/');
 }
 
-registerActionListeners();
+const database = new Database()
+registerActionListeners(database);
 
 app.whenReady().then(() => {
   createWindow();
