@@ -1,14 +1,14 @@
 class Database {
   constructor(dbFile) {
-    this.db = require('better-sqlite3')(dbFile ?? ':memory:', {
-      verbose: console.log,
-    });
+    this.db = require('better-sqlite3')(dbFile ?? ':memory:');
 
-    this.db.prepare(
-      `create table if not exists counters 
+    this.db
+      .prepare(
+        `create table if not exists counters 
         (name text primary key,
         value integer default 0)`
-    ).run();
+      )
+      .run();
   }
 
   async create(name) {

@@ -11,10 +11,10 @@ declare module 'vue' {
 }
 
 export interface Database {
-  create: (name: string) => boolean;
-  read: () => Counter[];
-  update: (name: string, value: number) => boolean;
-  delete: (name: string) => boolean;
+  create: (name: string) => Promise<boolean>;
+  read: () => Promise<Counter[]>;
+  update: (name: string, value: number) => Promise<boolean>;
+  delete: (name: string) => Promise<boolean>;
 }
 
 declare global {

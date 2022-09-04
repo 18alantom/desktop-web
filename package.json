@@ -1,17 +1,19 @@
 {
   "name": "electron-test",
-  "main": "main.js",
   "private": true,
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "rebuild": "electron-rebuild",
-    "electron:start": "electron .",
+    "electron:start": "electron ./backend-desktop/main.js",
+    "fastify:start": "node ./backend-server/server.js",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fastify/cors": "^8.1.0",
     "better-sqlite3": "^7.6.2",
+    "fastify": "^4.5.3",
     "vue": "^3.2.37"
   },
   "devDependencies": {
