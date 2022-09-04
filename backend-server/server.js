@@ -1,13 +1,16 @@
+require('dotenv').config();
 const Fastify = require('fastify').default;
 const cors = require('@fastify/cors').default;
 const fastify = Fastify({ logger: true });
 
 const { Database } = require('../backend-common/database');
-const database = new Database();
+const database = new Database(process.env.DB_PATH);
 
-fastify.register(cors, {
-  origin: 'http://0.0.0.0:3000',
-});
+if (process.env.MODE === 'development') {
+  fastify.register(cors, {
+    origin: `http://0.0.0.0:${process.env.VITE_PORT_FRONTEND}`,
+  });
+}
 
 // Create
 fastify.put('/api', async (request, reply) => {
@@ -32,4 +35,4 @@ fastify.delete('/api', async (request, reply) => {
   reply.send(await database.delete(name));
 });
 
-fastify.listen({ port: 3030 });
+fastify.listen({ port: process.env.VITE_PORT_SERVER });
