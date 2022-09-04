@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "rebuild": "electron-rebuild",
+    "electron:rebuild": "electron-rebuild",
     "electron:start": "electron ./backend-desktop/main.js",
-    "fastify:start": "node ./backend-server/server.js",
+    "node:rebuild": "rm -rf node_modules && yarn",
+    "node:start": "node ./backend-server/server.js",
     "preview": "vite preview"
   },
   "dependencies": {
