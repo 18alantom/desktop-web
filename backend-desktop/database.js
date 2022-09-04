@@ -1,46 +1,35 @@
 class Database {
-  constructor() {
-    this.counters = new Map();
+  constructor(dbFile) {
+    this.db = require('better-sqlite3')(dbFile ?? ':memory:', {
+      verbose: console.log,
+    });
 
-    for (const data of getDummyData()) {
-      this.counters.set(data.name, data);
-    }
+    this.db.prepare(
+      `create table if not exists counters 
+        (name text primary key,
+        value integer default 0)`
+    ).run();
   }
 
   async create(name) {
-    console.log('create', name);
-    this.counters.set(name, { name, value: 0 });
-    return true;
+    return !!this.db
+      .prepare('insert into counters (name, value) values (?, 0)')
+      .run(name);
   }
 
   async read() {
-    const list = [];
-    console.log('read');
-    for (const name of this.counters.keys()) {
-      list.push(this.counters.get(name));
-    }
-
-    return list;
+    return this.db.prepare('select * from counters').all();
   }
 
   async update(name, value) {
-    console.log('update', name, value);
-    this.counters.set(name, { name, value });
-    return true;
+    return !!this.db
+      .prepare('update counters set value = ? where name = ?')
+      .run(value, name);
   }
 
   async delete(name) {
-    console.log('delete', name);
-    this.counters.delete(name);
-    return true;
+    return !!this.db.prepare('delete from counters where name = ?').run(name);
   }
-}
-
-function getDummyData() {
-  return [
-    { name: 'counter-a', value: 3 },
-    { name: 'counter-b', value: 7 },
-  ];
 }
 
 module.exports = { Database };
