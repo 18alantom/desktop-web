@@ -1,7 +1,8 @@
 require('dotenv').config();
+const path = require('path');
 const Fastify = require('fastify').default;
 const cors = require('@fastify/cors').default;
-const fastify = Fastify({ logger: true });
+const fastify = Fastify({ logger: process.env.MODE === 'development' });
 
 const { Database } = require('../backend-common/database');
 const database = new Database(process.env.DB_PATH);
@@ -10,6 +11,12 @@ if (process.env.MODE === 'development') {
   fastify.register(cors, {
     origin: `http://0.0.0.0:${process.env.VITE_PORT_FRONTEND}`,
   });
+} else {
+  fastify.register(require('@fastify/static'), {
+    root: path.join(__dirname, '..', 'dist'),
+  });
+
+  fastify.get('/', (_, reply) => reply.sendFile('index.html'));
 }
 
 // Create
@@ -35,4 +42,6 @@ fastify.delete('/api', async (request, reply) => {
   reply.send(await database.delete(name));
 });
 
-fastify.listen({ port: process.env.VITE_PORT_SERVER });
+const port = process.env.VITE_PORT_SERVER;
+console.log(`listening on ${port}`);
+fastify.listen({ port });
