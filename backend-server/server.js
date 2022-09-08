@@ -9,7 +9,10 @@ const database = new Database(process.env.DB_PATH);
 
 if (process.env.MODE === 'development') {
   fastify.register(cors, {
-    origin: `http://0.0.0.0:${process.env.VITE_PORT_FRONTEND}`,
+    origin: [
+      `http://0.0.0.0:${process.env.VITE_PORT_FRONTEND}`,
+      `http://localhost:${process.env.VITE_PORT_FRONTEND}`,
+    ],
   });
 } else {
   fastify.register(require('@fastify/static'), {

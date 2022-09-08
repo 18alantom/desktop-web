@@ -6,8 +6,8 @@ const { Database } = require('../backend-common/database');
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 600,
-    height: 577,
+    width: 900,
+    height: 600,
     titleBarStyle: 'hidden',
     webPreferences: {
       nodeIntegration: false,
