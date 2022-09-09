@@ -16,7 +16,7 @@ if (process.env.MODE === 'development') {
   });
 } else {
   fastify.register(require('@fastify/static'), {
-    root: path.join(__dirname, '..', 'dist'),
+    root: path.join(__dirname, 'dist'),
   });
 
   fastify.get('/', (_, reply) => reply.sendFile('index.html'));

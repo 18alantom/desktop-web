@@ -3,13 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "electron:rebuild": "electron-rebuild",
-    "electron:start": "electron ./backend-desktop/main.js",
-    "node:rebuild": "rm -rf node_modules && yarn",
-    "node:start": "node ./backend-server/server.js",
-    "serve": "export MODE=production && export VITE_PORT_SERVER=5000 && yarn node:start"
+    "rebuild:electron": "electron-rebuild",
+    "rebuild:node": "rm -rf node_modules && yarn",
+    "build:electron": "node ./scripts/build.mjs --electron",
+    "build:node": "node ./scripts/build.mjs",
+    "dev:electron": "node ./scripts/dev.mjs --electron",
+    "dev:node": "node ./scripts/dev.mjs",
+    "serve": "node ./scripts/serve.mjs"
   },
   "dependencies": {
     "@fastify/cors": "^8.1.0",
@@ -23,7 +24,9 @@
     "@vitejs/plugin-vue": "^3.0.3",
     "autoprefixer": "^10.4.8",
     "electron": "^19.0.0",
+    "electron-builder": "^23.3.3",
     "electron-rebuild": "^3.2.9",
+    "execa": "^6.1.0",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.6.4",
