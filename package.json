@@ -3,9 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "build": "vue-tsc --noEmit && vite build",
-    "rebuild:electron": "electron-rebuild",
-    "rebuild:node": "rm -rf node_modules && yarn",
+    "rebuild:electron": "electron-rebuild -w better-sqlite3",
+    "rebuild:node": "npm rebuild better-sqlite3",
     "build:electron": "node ./scripts/build.mjs --electron",
     "build:node": "node ./scripts/build.mjs",
     "dev:electron": "node ./scripts/dev.mjs --electron",

@@ -1,0 +1,5 @@
+productName: Electron Builder Test
+mac:
+  identity: null
+  target:
+    - zip
