@@ -1,11 +1,11 @@
 import { ref, Ref } from 'vue';
-import { Counter, Database } from './types';
+import { Counter, CRUDInterface } from './types';
 
 export class CounterManager {
   counters: Ref<Map<string, Counter>>;
-  db: Database;
+  db: CRUDInterface;
 
-  constructor(db: Database) {
+  constructor(db: CRUDInterface) {
     this.db = db;
     this.counters = ref(new Map());
   }

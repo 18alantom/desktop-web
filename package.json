@@ -1,5 +1,7 @@
 {
-  "name": "electron-test",
+  "name": "desktop-web",
+  "author": "18alantom",
+  "description": "Code reuse between desktop and web",
   "private": true,
   "version": "0.0.0",
   "scripts": {

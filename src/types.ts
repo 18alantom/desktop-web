@@ -10,7 +10,7 @@ declare module 'vue' {
   }
 }
 
-export interface Database {
+export interface CRUDInterface {
   create: (name: string) => Promise<boolean>;
   read: () => Promise<Counter[]>;
   update: (name: string, value: number) => Promise<boolean>;
@@ -19,6 +19,6 @@ export interface Database {
 
 declare global {
   interface Window {
-    db: Database;
+    db: CRUDInterface;
   }
 }

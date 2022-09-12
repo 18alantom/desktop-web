@@ -1,6 +1,6 @@
-import { Counter, Database } from './types';
+import { Counter, CRUDInterface } from './types';
 
-export class APIDatabase implements Database {
+export class APICaller implements CRUDInterface {
   apiURL: string;
 
   constructor(apiURL: string) {

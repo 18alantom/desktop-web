@@ -1,4 +1,4 @@
-productName: Electron Builder Test
+productName: Counters
 mac:
   identity: null
   target:
